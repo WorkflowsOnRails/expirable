@@ -63,7 +63,7 @@ class ExampleTask < ActiveRecord::Base
   include Expirable
   
   scope :newly_expired,
-        -> { in_progress.where('deadline < ?', DateTime.now)
+        -> { in_progress.where('deadline < ?', DateTime.now) }
 
   aasm do
     # ... state and event definitions skipped ...
