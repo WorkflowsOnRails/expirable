@@ -14,7 +14,7 @@ To install the Expirable and its dependencies, add `expirable` and an
 appropriate Delayed::Jobs backend to your Gemfile:
 ```rb
 gem 'delayed_job_active_record'
-gem 'expirable', git: 'https://github.com/WorkflowsOnRails/expirable.git', branch: 'master'
+gem 'expirable'
 ```
 
 Next, set up Delayed::Job if you are not already using it in your project:
@@ -40,7 +40,7 @@ from the root of the Rails project, and Delayed::Job worker with `./bin/delayed_
 You can also use [Foreman](http://blog.daviddollar.org/2011/05/06/introducing-foreman.html)
 to manage these processes. For example, if you run your Rails application on Unicorn, then
 you can create a `Procfile` with the following content and run your application with `foreman start`:
-```
+```conf
 cron: bundle exec clockwork lib/clock.rb
 web: bundle exec unicorn_rails
 worker: ./bin/delayed_job run
