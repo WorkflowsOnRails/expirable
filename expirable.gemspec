@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name        = 'expirable'
-  s.version     = '1.0.0'
-  s.date        = '2013-12-22'
+  s.version     = '1.0.1'
+  s.date        = '2014-03-31'
   s.summary     = "Expirable"
   s.description = "Easily handle deadline-based workflow transitions in Rails"
   s.authors     = ["Brendan MacDonell"]
   s.email       = 'brendan@macdonell.net'
-  s.files       = ["lib/expirable.rb"]
+  s.files       = Dir.glob("lib/**/*") + %w(README.md)
   s.homepage    = 'http://rubygems.org/gems/expirable'
   s.license     = 'MIT'
 
