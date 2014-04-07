@@ -13,11 +13,16 @@
 # have not yet received a `deadline_expired` message.
 #
 # @author Brendan MacDonell <brendan@macdonell.net>
+
+require 'active_support'
+require 'active_support/core_ext'
+
 module Expirable
   extend ActiveSupport::Concern
 
+  LOGGER = defined?(Rails) ? Rails.logger : ActiveSupport::Logger.new(STDERR)
+
   # @klasses is a collection holding all classes that have included Expirable.
-  # It is traversed each time 
   @klasses = []
 
   def self.register(klass)
@@ -29,11 +34,12 @@ module Expirable
   end
 
   def self.send_expired_event(object)
-    Rails.logger.info "Sending deadline expired event to #{object}"
+    LOGGER.info "Sending deadline expired event to #{object}"
+
     begin
       object.deadline_expired
     rescue Exception => e
-      Rails.logger.error <<-eos.strip_heredoc
+      LOGGER.error <<-eos.strip_heredoc
         Deadline expiration failed with #{e.message}
         #{e.backtrace.join("\n")}
       eos
