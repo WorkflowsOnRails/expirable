@@ -24,7 +24,6 @@ describe Expirable do
   end
 
   it 'does nothing when there are no newly expired objects' do
-    allow(Expirable).to receive(:delay) { Expirable }
     allow(Fake).to receive(:newly_expired) { [] }
 
     Expirable.send_expired_events
@@ -33,7 +32,6 @@ describe Expirable do
   it 'calls send_expired_event on each newly expired object' do
     fake = Fake.new
 
-    allow(Expirable).to receive(:delay) { Expirable }
     allow(Fake).to receive(:newly_expired) { [fake] }
     expect(fake).to receive(:deadline_expired)
 
@@ -43,7 +41,6 @@ describe Expirable do
   it 'handles multiple newly-expired objects' do
     fakes = 3.times.map { Fake.new }
 
-    allow(Expirable).to receive(:delay) { Expirable }
     allow(Fake).to receive(:newly_expired) { fakes }
     fakes.each { |fake| expect(fake).to receive(:deadline_expired) }
 
